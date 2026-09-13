@@ -3,6 +3,7 @@ import logging
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api import auth, catalog
 from app.config import get_settings
 from app.logging_conf import configure_logging
 
@@ -27,6 +28,10 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+    app.include_router(auth.router, prefix="/api/v1")
+    app.include_router(catalog.public_router, prefix="/api/v1")
+    app.include_router(catalog.admin_router, prefix="/api/v1")
 
     @app.get("/")
     def root() -> dict:
