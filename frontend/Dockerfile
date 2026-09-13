@@ -12,6 +12,8 @@ RUN npm run build
 # Stage 2: runtime — nginx serves the static dist on :3000 (no node/npm)
 FROM nginx:stable-alpine
 
+RUN apk update && apk upgrade --no-cache
+
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /app/dist
 
