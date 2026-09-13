@@ -255,6 +255,9 @@ jobs:
           DIGEST: ${{ matrix.image }}:latest
         run: cosign sign "$DIGEST" --yes
 
+      - name: Install syft
+        uses: anchore/sbom-action@v0
+
       - name: Generate SBOM and attach as cosign attestation
         env:
           IMAGE: ${{ matrix.image }}:latest
