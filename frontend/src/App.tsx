@@ -8,6 +8,8 @@ import { NavBar } from "./components/NavBar";
 import { CatalogPage } from "./pages/CatalogPage";
 import { CheckoutPage } from "./pages/CheckoutPage";
 import { LoginPage } from "./pages/LoginPage";
+import { OrderDetailPage } from "./pages/OrderDetailPage";
+import { OrdersPage } from "./pages/OrdersPage";
 import { ProductPage } from "./pages/ProductPage";
 import { RegisterPage } from "./pages/RegisterPage";
 
@@ -24,6 +26,8 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/orders" element={<OrdersPage />} />
+              <Route path="/orders/:id" element={<OrderDetailPage />} />
             </Routes>
           </main>
           <CartDrawer />

@@ -25,6 +25,9 @@ export function NavBar() {
                 Cart <span className="navbar-cart-badge">{count}</span>
               </button>
             )}
+            <Link to="/orders" className="navbar-link">
+              Orders
+            </Link>
             <span className="navbar-user">{user.email}</span>
             <button type="button" onClick={logout} className="navbar-link-button">
               Log out

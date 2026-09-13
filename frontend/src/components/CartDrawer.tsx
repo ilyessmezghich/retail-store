@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
+import { ApiError, api } from "../api/client";
 import { useAuth } from "../auth/store";
 import { useCart } from "../cart/store";
 
@@ -20,10 +21,28 @@ export function CartDrawer() {
   const { items, totalCents, drawerOpen, closeCart, updateQuantity, removeItem } = useCart();
   const [error, setError] = useState<string | null>(null);
   const [busyItemId, setBusyItemId] = useState<string | null>(null);
+  const [checkingOut, setCheckingOut] = useState(false);
+  const navigate = useNavigate();
 
   if (!drawerOpen) {
     return null;
   }
+
+  const runCheckout = async () => {
+    setError(null);
+    setCheckingOut(true);
+    try {
+      const response = await api.checkout();
+      window.location.href = response.checkout_url;
+    } catch (err: unknown) {
+      if (err instanceof ApiError && err.status === 401) {
+        navigate("/login");
+      } else {
+        setError(err instanceof Error ? err.message : "Could not start checkout");
+      }
+      setCheckingOut(false);
+    }
+  };
 
   const runUpdate = async (itemId: string, quantity: number) => {
     setError(null);
@@ -123,9 +142,14 @@ export function CartDrawer() {
             <p className="cart-subtotal">
               Subtotal <strong>{formatCents(totalCents, items[0]?.currency ?? "usd")}</strong>
             </p>
-            <Link to="/checkout" className="cart-checkout-link">
-              Checkout →
-            </Link>
+            <button
+              type="button"
+              className="cart-checkout-link"
+              disabled={checkingOut}
+              onClick={runCheckout}
+            >
+              {checkingOut ? "Starting checkout…" : "Checkout →"}
+            </button>
           </div>
         )}
       </aside>

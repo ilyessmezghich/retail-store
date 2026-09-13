@@ -3,7 +3,7 @@ import logging
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import auth, cart, catalog
+from app.api import auth, cart, catalog, checkout, orders, webhooks
 from app.config import get_settings
 from app.logging_conf import configure_logging
 
@@ -33,6 +33,9 @@ def create_app() -> FastAPI:
     app.include_router(cart.router, prefix="/api/v1")
     app.include_router(catalog.public_router, prefix="/api/v1")
     app.include_router(catalog.admin_router, prefix="/api/v1")
+    app.include_router(checkout.router, prefix="/api/v1")
+    app.include_router(webhooks.router, prefix="/api/v1")
+    app.include_router(orders.router, prefix="/api/v1")
 
     @app.get("/")
     def root() -> dict:

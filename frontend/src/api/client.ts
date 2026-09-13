@@ -49,6 +49,35 @@ export interface Cart {
   count: number;
 }
 
+export interface CheckoutResponse {
+  checkout_url: string;
+  order_id: string;
+  session_id: string;
+}
+
+export interface OrderItem {
+  id: string;
+  product_id: string;
+  product_name: string;
+  price_cents: number;
+  quantity: number;
+  line_total_cents: number;
+}
+
+export interface Order {
+  id: string;
+  status: string;
+  total_cents: number;
+  stripe_session_id: string | null;
+  created_at: string;
+  items: OrderItem[];
+}
+
+export interface OrderList {
+  items: Order[];
+  total: number;
+}
+
 export class ApiError extends Error {
   readonly status: number;
 
@@ -123,4 +152,8 @@ export const api = {
     apiRequest<Cart>(`/cart/items/${encodeURIComponent(itemId)}`, {
       method: "DELETE",
     }),
+  checkout: () => apiRequest<CheckoutResponse>("/checkout", { method: "POST" }),
+  listOrders: () => apiRequest<OrderList>("/orders"),
+  getOrder: (orderId: string) =>
+    apiRequest<Order>(`/orders/${encodeURIComponent(orderId)}`),
 };

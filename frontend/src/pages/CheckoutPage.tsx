@@ -8,8 +8,8 @@ export function CheckoutPage() {
         <Link to="/">Catalog</Link> / Checkout
       </p>
       <p className="checkout-stub">
-        Checkout is coming in Epic D. Your cart is saved server-side, so you can pick up right
-        where you left off.
+        Checkout is handled with Stripe from your cart. Open the cart and press “Checkout →”
+        to pay with a Stripe test card.
       </p>
       <Link to="/" className="cart-checkout-link">
         Back to catalog

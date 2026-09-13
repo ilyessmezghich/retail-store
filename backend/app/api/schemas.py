@@ -95,3 +95,32 @@ class CartOut(BaseModel):
     items: list[CartItemOut]
     total_cents: int
     count: int
+
+
+class CheckoutOut(BaseModel):
+    checkout_url: str
+    order_id: uuid.UUID
+    session_id: str
+
+
+class OrderItemOut(BaseModel):
+    id: uuid.UUID
+    product_id: uuid.UUID
+    product_name: str
+    price_cents: int
+    quantity: int
+    line_total_cents: int
+
+
+class OrderOut(BaseModel):
+    id: uuid.UUID
+    status: str
+    total_cents: int
+    stripe_session_id: str | None
+    created_at: datetime
+    items: list[OrderItemOut]
+
+
+class OrderListOut(BaseModel):
+    items: list[OrderOut]
+    total: int

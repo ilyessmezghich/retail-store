@@ -394,6 +394,11 @@ body {
   cursor: pointer;
 }
 
+.cart-checkout-link:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
 .product-add-form {
   display: flex;
   align-items: center;
@@ -428,4 +433,81 @@ body {
 
 .checkout-stub {
   color: #4b5563;
+}
+
+.order-flash-ok {
+  padding: 0.75rem 1rem;
+  border: 1px solid #86efac;
+  border-radius: 0.5rem;
+  background-color: #ecfdf5;
+  color: #047857;
+  font-weight: 600;
+}
+
+.order-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.order-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  background-color: #ffffff;
+}
+
+.order-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.order-card-id {
+  font-weight: 700;
+  color: #111827;
+  text-decoration: none;
+}
+
+.order-status {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.75rem;
+}
+
+.order-status-paid {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.order-status-pending {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.order-card-meta {
+  margin: 0.25rem 0 0.5rem;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.order-card-items {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  color: #374151;
+}
+
+.order-card-total {
+  margin: 0.75rem 0 0;
+  font-weight: 700;
+}
+
+.order-card-total strong {
+  float: right;
 }
