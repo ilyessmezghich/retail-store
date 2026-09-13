@@ -31,6 +31,24 @@ export interface TokenResponse {
   token_type: string;
 }
 
+export interface CartItem {
+  id: string;
+  product_id: string;
+  name: string;
+  slug: string;
+  price_cents: number;
+  currency: string;
+  image_url: string;
+  quantity: number;
+  line_total_cents: number;
+}
+
+export interface Cart {
+  items: CartItem[];
+  total_cents: number;
+  count: number;
+}
+
 export class ApiError extends Error {
   readonly status: number;
 
@@ -90,4 +108,19 @@ export const api = {
     apiRequest<ProductList>(`/products?page=${page}&size=${size}`),
   getProduct: (slug: string) =>
     apiRequest<Product>(`/products/${encodeURIComponent(slug)}`),
+  getCart: () => apiRequest<Cart>("/cart"),
+  addCartItem: (productId: string, quantity = 1) =>
+    apiRequest<Cart>("/cart/items", {
+      method: "POST",
+      body: JSON.stringify({ product_id: productId, quantity }),
+    }),
+  updateCartItem: (itemId: string, quantity: number) =>
+    apiRequest<Cart>(`/cart/items/${encodeURIComponent(itemId)}`, {
+      method: "PATCH",
+      body: JSON.stringify({ quantity }),
+    }),
+  removeCartItem: (itemId: string) =>
+    apiRequest<Cart>(`/cart/items/${encodeURIComponent(itemId)}`, {
+      method: "DELETE",
+    }),
 };

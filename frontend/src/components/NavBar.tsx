@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 
 import { useAuth } from "../auth/store";
+import { useCart } from "../cart/store";
 
 export function NavBar() {
   const { user, logout } = useAuth();
+  const { count, openCart } = useCart();
 
   return (
     <nav className="navbar">
@@ -13,6 +15,16 @@ export function NavBar() {
       <div className="navbar-actions">
         {user ? (
           <>
+            {count > 0 && (
+              <button
+                type="button"
+                className="navbar-cart-button"
+                onClick={openCart}
+                aria-label={`Cart with ${count} items`}
+              >
+                Cart <span className="navbar-cart-badge">{count}</span>
+              </button>
+            )}
             <span className="navbar-user">{user.email}</span>
             <button type="button" onClick={logout} className="navbar-link-button">
               Log out

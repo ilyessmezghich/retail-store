@@ -68,3 +68,30 @@ class ProductListOut(BaseModel):
 
 class StockDelta(BaseModel):
     delta: int
+
+
+class CartItemAdd(BaseModel):
+    product_id: uuid.UUID
+    quantity: int = Field(default=1, ge=1)
+
+
+class CartItemUpdate(BaseModel):
+    quantity: int = Field(ge=1)
+
+
+class CartItemOut(BaseModel):
+    id: uuid.UUID
+    product_id: uuid.UUID
+    name: str
+    slug: str
+    price_cents: int
+    currency: str
+    image_url: str
+    quantity: int
+    line_total_cents: int
+
+
+class CartOut(BaseModel):
+    items: list[CartItemOut]
+    total_cents: int
+    count: int

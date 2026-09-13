@@ -175,3 +175,257 @@ body {
 .error {
   color: #b91c1c;
 }
+
+.navbar-cart-button {
+  background: none;
+  border: none;
+  color: #f9fafb;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  position: relative;
+}
+
+.navbar-cart-button:hover {
+  background-color: #374151;
+}
+
+.navbar-cart-badge {
+  display: inline-block;
+  min-width: 1.15rem;
+  padding: 0 0.3rem;
+  border-radius: 0.75rem;
+  background-color: #ef4444;
+  color: #ffffff;
+  font-size: 0.75rem;
+  line-height: 1.1;
+}
+
+.product-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.product-card-add {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.55rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  background-color: #111827;
+  color: #f9fafb;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.product-card-add:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.cart-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(17, 24, 39, 0.45);
+  z-index: 40;
+}
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(420px, 100vw);
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #ffffff;
+  border-left: 1px solid #e5e7eb;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  z-index: 50;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cart-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-drawer-header h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.cart-drawer-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #4b5563;
+}
+
+.cart-drawer-empty {
+  color: #6b7280;
+  margin: 0;
+}
+
+.cart-drawer-lines {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cart-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+}
+
+.cart-line-image {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 0.375rem;
+  background-color: #f3f4f6;
+}
+
+.cart-line-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-line-name {
+  display: block;
+  font-weight: 600;
+  color: #111827;
+  text-decoration: none;
+}
+
+.cart-line-price {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.cart-line-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cart-stepper {
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: #ffffff;
+  color: #111827;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.cart-stepper:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.cart-line-qty {
+  min-width: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.cart-line-remove {
+  background: none;
+  border: none;
+  color: #b91c1c;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.cart-line-remove:disabled {
+  opacity: 0.45;
+}
+
+.cart-line-total {
+  font-weight: 700;
+  color: #111827;
+}
+
+.cart-drawer-footer {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 0.75rem;
+}
+
+.cart-subtotal {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  color: #111827;
+}
+
+.cart-subtotal strong {
+  float: right;
+}
+
+.cart-checkout-link {
+  display: block;
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  background-color: #111827;
+  color: #f9fafb;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.product-add-form {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.product-qty-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.product-add-button {
+  padding: 0.6rem 1.25rem;
+  border: none;
+  border-radius: 0.375rem;
+  background-color: #111827;
+  color: #f9fafb;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.product-add-button:disabled {
+  opacity: 0.6;
+}
+
+.product-feedback-ok {
+  color: #059669;
+  margin: 0;
+}
+
+.checkout-stub {
+  color: #4b5563;
+}
