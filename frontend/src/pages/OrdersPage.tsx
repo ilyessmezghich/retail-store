@@ -84,7 +84,16 @@ export function OrdersPage() {
     <div className="page">
       <h1>Orders</h1>
       {flash !== null && <p className="order-flash-ok">{flash}</p>}
-      {loading && <p>Loading orders…</p>}
+      {loading && (
+        <ul className="order-list" aria-label="Loading orders">
+          {Array.from({ length: 3 }, (_, index) => (
+            <li className="order-card" key={index}>
+              <div className="skeleton skeleton-line" />
+              <div className="skeleton skeleton-line skeleton-line-short" />
+            </li>
+          ))}
+        </ul>
+      )}
       {!loading && error !== null && <p className="error">{error}</p>}
       {!loading && error === null && orders.length === 0 && (
         <p className="cart-drawer-empty">No orders yet.</p>

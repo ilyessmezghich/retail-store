@@ -15,6 +15,11 @@ export function NavBar() {
       <div className="navbar-actions">
         {user ? (
           <>
+            {user.role === "admin" && (
+              <Link to="/admin" className="navbar-link">
+                Admin
+              </Link>
+            )}
             {count > 0 && (
               <button
                 type="button"

@@ -67,7 +67,19 @@ export function CatalogPage() {
   return (
     <div className="page">
       <h1>Catalog</h1>
-      {loading && <p>Loading products…</p>}
+      {loading && (
+        <div className="product-grid" aria-label="Loading products">
+          {Array.from({ length: 8 }, (_, index) => (
+            <div className="product-card skeleton-card" key={index}>
+              <div className="skeleton skeleton-image" />
+              <div className="product-card-body">
+                <div className="skeleton skeleton-line" />
+                <div className="skeleton skeleton-line skeleton-line-short" />
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
       {!loading && error !== null && <p className="error">{error}</p>}
       {!loading && error === null && products.length === 0 && (
         <p>No products yet.</p>

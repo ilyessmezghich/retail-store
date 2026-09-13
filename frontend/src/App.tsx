@@ -3,11 +3,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { AuthProvider } from "./auth/store";
 import { CartProvider } from "./cart/store";
+import { AdminGuard } from "./components/AdminGuard";
 import { CartDrawer } from "./components/CartDrawer";
 import { NavBar } from "./components/NavBar";
+import { AdminPage } from "./pages/AdminPage";
+import { AdminProductFormPage } from "./pages/AdminProductFormPage";
 import { CatalogPage } from "./pages/CatalogPage";
 import { CheckoutPage } from "./pages/CheckoutPage";
 import { LoginPage } from "./pages/LoginPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 import { OrderDetailPage } from "./pages/OrderDetailPage";
 import { OrdersPage } from "./pages/OrdersPage";
 import { ProductPage } from "./pages/ProductPage";
@@ -28,6 +32,31 @@ function App() {
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/orders" element={<OrdersPage />} />
               <Route path="/orders/:id" element={<OrderDetailPage />} />
+              <Route
+                path="/admin"
+                element={
+                  <AdminGuard>
+                    <AdminPage />
+                  </AdminGuard>
+                }
+              />
+              <Route
+                path="/admin/new"
+                element={
+                  <AdminGuard>
+                    <AdminProductFormPage />
+                  </AdminGuard>
+                }
+              />
+              <Route
+                path="/admin/:id/edit"
+                element={
+                  <AdminGuard>
+                    <AdminProductFormPage />
+                  </AdminGuard>
+                }
+              />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </main>
           <CartDrawer />

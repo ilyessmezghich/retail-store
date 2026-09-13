@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
 import { api } from "../api/client";
@@ -52,22 +52,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(nextUser);
   };
 
-  const login = async (email: string, password: string) => {
+  const login = useCallback(async (email: string, password: string) => {
     const response = await api.login(email, password);
     setAuth(response.access_token, null);
     const current = await api.me();
     setAuth(response.access_token, current);
     return current;
-  };
+  }, []);
 
-  const register = async (email: string, password: string) => {
+  const register = useCallback(async (email: string, password: string) => {
     await api.register(email, password);
     return login(email, password);
-  };
+  }, [login]);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setAuth(null, null);
-  };
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, token, login, register, logout }}>

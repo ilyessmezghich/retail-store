@@ -78,6 +78,27 @@ export interface OrderList {
   total: number;
 }
 
+export interface ProductCreatePayload {
+  name: string;
+  slug: string;
+  description: string;
+  price_cents: number;
+  currency: string;
+  image_url: string;
+  stock: number;
+}
+
+export interface ProductUpdatePayload {
+  name?: string;
+  slug?: string;
+  description?: string;
+  price_cents?: number;
+  currency?: string;
+  image_url?: string;
+  stock?: number;
+  archived?: boolean;
+}
+
 export class ApiError extends Error {
   readonly status: number;
 
@@ -156,4 +177,25 @@ export const api = {
   listOrders: () => apiRequest<OrderList>("/orders"),
   getOrder: (orderId: string) =>
     apiRequest<Order>(`/orders/${encodeURIComponent(orderId)}`),
+  listAllProducts: (page = 1, size = 100) =>
+    apiRequest<ProductList>(`/admin/products?page=${page}&size=${size}`),
+  createProduct: (payload: ProductCreatePayload) =>
+    apiRequest<Product>("/admin/products", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
+  updateProduct: (productId: string, payload: ProductUpdatePayload) =>
+    apiRequest<Product>(`/admin/products/${encodeURIComponent(productId)}`, {
+      method: "PUT",
+      body: JSON.stringify(payload),
+    }),
+  adjustStock: (productId: string, delta: number) =>
+    apiRequest<Product>(`/admin/products/${encodeURIComponent(productId)}/stock`, {
+      method: "PATCH",
+      body: JSON.stringify({ delta }),
+    }),
+  archiveProduct: (productId: string) =>
+    apiRequest<Product>(`/admin/products/${encodeURIComponent(productId)}`, {
+      method: "DELETE",
+    }),
 };
