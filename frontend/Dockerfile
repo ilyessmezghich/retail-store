@@ -1,3 +1,4 @@
+# (C) retail-store - healthchecked
 # Stage 1: build — compile the React+Vite app into static dist/ (node/npm only here)
 FROM node:22-alpine AS build
 
